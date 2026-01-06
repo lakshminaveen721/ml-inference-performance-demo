@@ -30,7 +30,11 @@ jobs:
       - name: Start inference service
         run: |
           uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-          sleep 5
+      
+      - name: Wait for service to be ready
+        run: |
+          python scripts/wait_for_service.py
+
 
       - name: Run performance benchmark
         run: |
