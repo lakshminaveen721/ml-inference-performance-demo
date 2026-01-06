@@ -3,7 +3,7 @@ import requests
 import sys
 
 URL = "http://localhost:8000/health"
-TIMEOUT = 30  # seconds
+TIMEOUT = 60  # seconds
 
 start = time.time()
 
