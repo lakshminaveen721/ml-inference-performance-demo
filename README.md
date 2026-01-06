@@ -127,22 +127,6 @@ This project mirrors how **real ML platform and AI infrastructure teams** operat
 
 ---
 
-## 📎 One-Sentence Summary
-
-> A production-style ML inference system that measures, optimizes, and enforces latency and throughput SLAs using dynamic batching, precision control, and CI-based performance regression testing.
-
----
-
-## 📌 Suitable For Roles
-
-- AI Performance Engineer  
-- MLOps Engineer  
-- ML Platform Engineer  
-- AI Infrastructure Engineer  
-- Backend Engineer (AI systems)
-
----
-
 ## 🚦 Future Extensions (Optional)
 
 - Plug in external NLP / vision models  
