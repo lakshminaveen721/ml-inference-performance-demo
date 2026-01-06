@@ -59,10 +59,11 @@ INFERENCE_ERRORS = Counter(
 def health():
     return {
         "status": "ok",
+        "model_ready": model_service.ready,
         "device": model_service.device,
         "precision": model_service.precision,
-        "batching": True,
     }
+
 
 
 
