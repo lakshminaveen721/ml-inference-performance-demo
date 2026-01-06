@@ -1,36 +1,33 @@
-Project Title
+# 🚀 Production-Style ML Inference Performance & MLOps System
 
-Production-Style ML Inference Performance & MLOps System
+## 📌 Overview
 
+This project implements a **production-style machine learning inference system** with a strong focus on **performance engineering, observability, and MLOps best practices**.
 
-Overview
+Instead of optimizing model accuracy, the system is designed to **measure, optimize, and enforce inference performance guarantees** such as **latency, throughput, and regression prevention** — challenges that dominate real-world ML systems in **2026**.
 
-This project implements a production-style machine learning inference system with a strong focus on performance engineering, observability, and MLOps best practices.
+---
 
-Rather than optimizing model accuracy, the system is designed to measure, optimize, and enforce inference performance guarantees such as latency, throughput, and regression prevention—problems that dominate real-world ML systems in 2026.
+## 🎯 Key Problems Addressed
 
+- High **tail latency** (p95 / p99) under load  
+- **GPU underutilization** in inference workloads  
+- Lack of **observability** in ML services  
+- **Silent performance regressions** after code changes  
 
-Key Problems Addressed
+---
 
-High tail latency (p95 / p99) under load
-
-GPU underutilization in inference workloads
-
-Lack of observability in ML services
-
-Silent performance regressions after code changes
-
-### SYstem Architecture
+## 🏗️ System Architecture
 
 Client / Load Generator
-        |
-        v
+|
+v
 FastAPI Inference Service
-        |
-        v
+|
+v
 Dynamic Batching Queue
-        |
-        v
+|
+v
 PyTorch Model (CPU / GPU, FP32 / FP16)
 
 Observability:
@@ -40,71 +37,121 @@ Reliability:
 CI Performance Regression Gates (GitHub Actions)
 
 
-##Core Features
-🔹 Real-Time Inference Service
+---
 
-FastAPI-based inference API
+## ⚙️ Core Features
 
-CPU and GPU compatible
+### 🔹 Real-Time Inference Service
+- FastAPI-based inference API  
+- CPU and GPU compatible  
+- Single-worker design to expose real bottlenecks  
 
-Single-worker design to expose true bottlenecks
+---
 
-🔹 Performance Observability
+### 🔹 Performance Observability
+- Latency histograms (p50 / p95 / p99)  
+- Request and error counters  
+- `/metrics` endpoint for Prometheus scraping  
 
-Latency histograms (p50 / p95 / p99)
+---
 
-Request and error counters
+### 🔹 Dynamic Request Batching
+- Micro-batching with configurable:
+  - batch size
+  - batching window  
+- Amortizes framework and kernel launch overhead  
+- Achieved **3×+ throughput improvement** under load  
 
-/metrics endpoint for Prometheus scraping
+---
 
-🔹 Dynamic Request Batching
+### 🔹 Precision-Aware Execution
+- Runtime precision switching:
+  - **FP32** — safe / debug mode  
+  - **FP16** — high-performance mode  
+- Controlled via environment variables  
 
-Micro-batching with configurable:
+---
 
-batch size
+### 🔹 CI-Based Performance Regression Gates
+- GitHub Actions pipeline runs on every PR  
+- Automatically:
+  - starts the inference service  
+  - waits for service readiness  
+  - executes a performance benchmark  
+- Fails the build if **latency budgets** are exceeded  
+- Prevents silent performance degradation  
 
-batching window
+---
 
-Amortizes framework and kernel launch overhead
+## 📊 Representative Performance Results
 
-3×+ throughput improvement observed under load
+| Metric | Before Batching | After Batching |
+|------|-----------------|----------------|
+| Avg latency | ~100 ms | ~25 ms |
+| p99 latency | ~464 ms | Significantly reduced |
+| Throughput | Baseline | **3×+ increase** |
+| GPU utilization | Low | Substantially higher |
 
-🔹 Precision-Aware Execution
+---
 
-Runtime switch between:
+## 🧪 Performance Enforcement in CI
 
-FP32 (safe / debug mode)
+Performance is treated as a **first-class contract**, not a best-effort metric.
 
-FP16 (high-performance mode)
+Example enforced budgets:
+- Average latency ≤ **250 ms**
+- p95 latency ≤ **500 ms**
 
-Controlled via environment variables
+Builds fail automatically if these budgets are violated.
 
-🔹 CI-Based Performance Regression Gates
+---
 
-GitHub Actions pipeline runs on every PR
+## 🛠️ Tech Stack
 
-Automatically:
+- **Python**, **FastAPI**
+- **PyTorch**, **TorchVision**
+- **Prometheus** (metrics & observability)
+- **GitHub Actions** (CI/CD)
+- **Custom dynamic batching implementation**
 
-starts inference service
+---
 
-waits for readiness
+## 🧠 Why This Project Matters
 
-executes a benchmark
+This project mirrors how **real ML platform and AI infrastructure teams** operate:
 
-Fails build if latency budgets are exceeded
+- Models are treated as black boxes  
+- Performance is measured, not assumed  
+- Optimizations are data-driven  
+- Regressions are caught automatically  
 
-Prevents silent performance degradation
+---
 
+## 📎 One-Sentence Summary
 
-##########
-Tech Stack
+> A production-style ML inference system that measures, optimizes, and enforces latency and throughput SLAs using dynamic batching, precision control, and CI-based performance regression testing.
 
-Python, FastAPI
+---
 
-PyTorch, TorchVision
+## 📌 Suitable For Roles
 
-Prometheus metrics
+- AI Performance Engineer  
+- MLOps Engineer  
+- ML Platform Engineer  
+- AI Infrastructure Engineer  
+- Backend Engineer (AI systems)
 
-GitHub Actions (CI)
+---
 
-Dynamic batching (custom implementation)
+## 🚦 Future Extensions (Optional)
+
+- Plug in external NLP / vision models  
+- Multi-model routing and benchmarking  
+- Cost-aware autoscaling  
+- LLM inference optimization  
+
+---
+
+## 📜 License
+
+MIT
